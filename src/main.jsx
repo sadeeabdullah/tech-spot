@@ -8,9 +8,11 @@ import AuthProvider from './Provider/AuthProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <HelmetProvider>
+    <div className='mx-auto max-w-screen-xl '>
     <AuthProvider>
   <RouterProvider router={Route}>
-  </RouterProvider>,
+  </RouterProvider>
   </AuthProvider>
+    </div>
   </HelmetProvider>
 )

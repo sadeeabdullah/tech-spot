@@ -1,9 +1,20 @@
 import { NavLink } from "react-router-dom";
 import navLogo from "../../../assets/Logo/Untitled design.svg"
+import { useEffect, useState } from "react";
 
 const Navbar = () =>{
 
   const user = true ;
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 0);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
     
 
   const navItems = <>
@@ -25,7 +36,7 @@ const Navbar = () =>{
           </NavLink>
           {
             user && <NavLink
-            to="/products"
+            to="/login"
             className={({ isActive }) =>
               isActive ? 'btn  bg-[#ff3131]  text-white btn-sm' : 'btn btn-ghost btn-sm'
             }
@@ -36,8 +47,15 @@ const Navbar = () =>{
   </>
 
     return (
-      <div className="navbar bg-base-100">
-      <div className="navbar-start">
+      <div className="">
+        <div
+      className={` ${
+        scrolled
+          ? "navbar  fixed z-10 bg-base-500 bg-opacity-100 bg-white text-black max-w-screen-xl mx-auto  "
+          : "navbar  fixed z-10 bg-base-500 bg-opacity-100 bg-white text-black max-w-screen-xl mx-auto  "
+      }`}
+    >
+      <div className="navbar-start ">
         <div className="dropdown">
           <label tabIndex={0} htmlFor="my-drawer-2"  className="drawer lg:drawer-open drawer-button   btn btn-ghost lg:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 " fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
@@ -66,6 +84,7 @@ const Navbar = () =>{
         <ul className="menu menu-horizontal px-1 space-x-2">
           {navItems}
         </ul>
+        
       </div>
       <div className="navbar-end">
       <div className="dropdown dropdown-end">
@@ -87,6 +106,7 @@ const Navbar = () =>{
     </div>
       </div>
     </div>
+      </div>
     );
 };
 

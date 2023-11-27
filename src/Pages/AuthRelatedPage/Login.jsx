@@ -1,10 +1,14 @@
-import { FaGoogle } from "react-icons/fa";
+
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import UseAuth from "../../Hooks/UseAuth";
+import GoogleLogin from "../../Components/Shared/Navbar/GoogleLogin";
 
 
 const Login = () => {
+    const {signIn} = UseAuth();
+
     const {
         register,
         handleSubmit,
@@ -14,23 +18,29 @@ const Login = () => {
 
       const onSubmit = ( data ) =>{
         console.log(data)
+        signIn(data.email,data.password)
+        .then(res =>{
+     
+          console.log(res)
+        })
+        .then(err=>{
+          console.log(err)
+        })
+        reset();
+       
       }
     
     return (
         <div>
-            {/* <Helmet>
-            <title>Tech Spot | Login/Register</title>
-            </Helmet> */}
-            <div className="hero-content flex-col md:flex-row">
-        <div className="text-center md:w-1/2 lg:text-left">
-          <h1 className="text-5xl  font-bold">SignUp now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
+            <Helmet>
+            <title>Tech Spot | Login</title>
+            </Helmet>
+            <div className="hero-content flex-col">
+        <div className="text-center md:w-1/2 lg:text-center text-main-color">
+          <h1 className="text-4xl  font-bold">Login now!</h1>
+          
         </div>
-        <div className="card md:w-1/2 w-full max-w-sm shadow-2xl bg-base-100">
+        <div className="card  w-full max-w-xl shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             
             
@@ -74,18 +84,18 @@ const Login = () => {
             </div>
 
             <div className="form-control mt-6">
-              <input className="btn btn-primary" type="submit" value="Sign Up" />
+              <input className="btn btn-primary bg-main-color border-0 text-white font-semibold" type="submit" value="Sign Up" />
             </div>
           </form>
           <p className="text-center mb-4">
-            <small className="text-sky-900">
-              Already have an account? <Link to="/login">Login</Link>
+            <small className="text-sky-900 ">
+              New here? <Link to="/register">register</Link>
             </small>
           </p>
           <div className="divider"></div>
-            <div className="flex justify-center items-center mb-8">
-            <FaGoogle className="text-red-700"></FaGoogle>
-            </div>
+          <div className="flex justify-center items-center mb-8">
+                <GoogleLogin className="text-red-700"></GoogleLogin>
+                </div>
         </div>
       </div>
         </div>
