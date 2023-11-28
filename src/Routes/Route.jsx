@@ -4,6 +4,7 @@ import Login from "../Pages/AuthRelatedPage/Login"
 import Register from "../Pages/AuthRelatedPage/Register";
 import Home from "../Pages/AuthRelatedPage/Home/Home";
 import ProductDetails from "../Pages/Productdetails/ProductDetails";
+import Product from "../Pages/Product/Product";
 
 const Route = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const Route = createBrowserRouter([
         {
             path:'/productDetails',
             element:<ProductDetails></ProductDetails>
+        },
+        {
+            path:'/products',
+            element:<Product></Product>
         }
 ]
         

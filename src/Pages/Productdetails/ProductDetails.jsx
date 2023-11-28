@@ -6,11 +6,13 @@ import productImage from '../../assets/Logo/Orange Modern Letter A Icon Design T
 import SectionTitle from '../../Components/Shared/SectionTitle/SectionTitle';
 import { useForm } from 'react-hook-form';
 const ProductDetails = () => {
+   
+
     const {
         register,
         handleSubmit,
+        // eslint-disable-next-line no-unused-vars
         reset,
-        formState: { errors },
       } = useForm()
     
     const onSubmit = (data) =>{
@@ -47,8 +49,8 @@ const ProductDetails = () => {
         {/* div for post review  */}
         <div>
         <SectionTitle title={"Post a review"}></SectionTitle>
-        <div className="card  w-full max-w-xl shadow-2xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+        <div className="card  w-full max-w-xl mx-auto shadow-2xl bg-base-100">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body ">
             
             
             <div className="form-control">
@@ -70,32 +72,47 @@ const ProductDetails = () => {
                 <span className="label-text">Reviewer Image</span>
               </label>
               <input
-                type="password"
-                placeholder="password"
+                type="text"
+                placeholder="text"
+                value={'ja paba taiu'}
                 className="input input-bordered"
-                name="text"
+                readOnly
+                name="image"
                 {...register("image", { required: true, })}
               />
               
               
             </div>
-            <div className="form-control">
+            <div className="form-control ">
               <label className="label">
-                <span className="label-text">Reviewer Image</span>
+                <span className="label-text">Write a Description</span>
               </label>
               <input
-                type="password"
-                placeholder="password"
+                type="text"
+                placeholder="description"
                 className="input input-bordered"
                 name="text"
-                {...register("image", { required: true, })}
+                {...register("description", { required: true, })}
               />
               
               
             </div>
+            {/* div for the rating */}
+            <div className='form-control w-1/3' >
+            <label className="label">
+                <span className="label-text">Rating</span>
+              </label>
+            <select {...register("Title", { required: true })}>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
 
+            </div>
             <div className="form-control mt-6">
-              <input className="btn btn-primary bg-main-color border-0 text-white font-semibold" type="submit" value="Sign Up" />
+              <input className="btn btn-primary w-fit bg-main-color border-0 text-white font-semibold" type="submit" value="Post" />
             </div>
           </form>
           
