@@ -7,7 +7,7 @@ const Banner = () => {
         <div className='text-center '>
             <Carousel autoPlay>
                 <div>
-                    <img src={image1} />
+                    <img className='' src={image1} />
                 </div>
                 <div>
                     <img src={image1}/>

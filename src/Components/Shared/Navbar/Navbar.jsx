@@ -1,12 +1,14 @@
 import { NavLink } from "react-router-dom";
 import navLogo from "../../../assets/Logo/Untitled design.svg"
 import { useEffect, useState } from "react";
+import UseAuth from "../../../Hooks/UseAuth";
 
 const Navbar = () =>{
 
-  const user = true ;
 
   const [scrolled, setScrolled] = useState(false);
+  const {user} = UseAuth();
+  console.log(user)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 0);
@@ -47,11 +49,11 @@ const Navbar = () =>{
   </>
 
     return (
-      <div className="">
+      <div className="mx-auto max-w-screen-xl">
         <div
       className={` ${
         scrolled
-          ? "navbar  fixed z-10 bg-base-500 bg-opacity-100 bg-white text-black max-w-screen-xl mx-auto  "
+          ? "navbar  fixed z-10 bg-base-500  bg-opacity-100 bg-white text-black max-w-screen-xl mx-auto  "
           : "navbar  fixed z-10 bg-base-500 bg-opacity-100 bg-white text-black max-w-screen-xl mx-auto  "
       }`}
     >
@@ -90,7 +92,7 @@ const Navbar = () =>{
       <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component" src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+          <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
         </div>
       </label>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">

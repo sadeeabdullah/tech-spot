@@ -1,13 +1,15 @@
 
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/UseAuth";
 import GoogleLogin from "../../Components/Shared/Navbar/GoogleLogin";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
     const {signIn} = UseAuth();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -20,13 +22,21 @@ const Login = () => {
         console.log(data)
         signIn(data.email,data.password)
         .then(res =>{
-     
-          console.log(res)
+     console.log(res)
+     Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "You have logged in successfully",
+      showConfirmButton: false,
+      timer: 1500
+    });
+          navigate('/')
+          reset();
         })
         .then(err=>{
           console.log(err)
         })
-        reset();
+        
        
       }
     

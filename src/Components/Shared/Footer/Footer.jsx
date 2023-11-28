@@ -9,7 +9,7 @@ import FooterImage from "../../../assets/Logo/Untitled design.svg"
 const Footer = () => {
     return (
          <div >
-            <div className="w-full bg-gray-900 p-16 text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            <div className="w-full mt-12 bg-gray-900 p-16 text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {/* div for the first */}
             <div>
                 <img src={FooterImage} alt="" />
