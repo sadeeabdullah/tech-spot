@@ -17,7 +17,7 @@ const Navbar = () =>{
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-    
+    const userRole =  "user";
 
   const navItems = <>
     <NavLink
@@ -30,21 +30,22 @@ const Navbar = () =>{
           </NavLink>
     <NavLink
             to="/products"
-            className={({ isActive }) =>
-              isActive ? 'btn bg-[#ff3131]  text-white  btn-sm' : 'btn btn-ghost btn-sm'
-            }
+            className={({ isActive }) => (isActive ? "active" : "default")}
           >
             Products
           </NavLink>
           {
-            user && <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              isActive ? 'btn  bg-[#ff3131]  text-white btn-sm' : 'btn btn-ghost btn-sm'
-            }
-          >
-            Login/Register
-          </NavLink>
+            user ? 
+          <NavLink to={userRole === "admin" ? '/dashboard/manageUser' : userRole === "moderator" ? '/dashboard/preview' : '/dashboard/userProfile'}
+          className={({ isActive }) => (isActive ? "active" : "default")}>
+              Dashboard
+          </NavLink>:
+          <NavLink
+          to="/login"
+          className={({ isActive }) => (isActive ? "active" : "default")}
+        >
+          Login/Register
+        </NavLink>
           }
   </>
 
@@ -82,13 +83,14 @@ const Navbar = () =>{
         <img className="bg-transparent" src={navLogo} alt="" />
         </a>
       </div>
+      
+      <div className="navbar-end">
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 space-x-2">
           {navItems}
         </ul>
         
       </div>
-      <div className="navbar-end">
       <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">

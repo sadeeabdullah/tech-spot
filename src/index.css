@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.active {
+    @apply btn bg-[#ff3131]  text-white  btn-sm border-0
+    
+}
+.default{
+    @apply btn btn-ghost btn-sm 
+}
