@@ -8,13 +8,14 @@ import Product from "../Pages/Product/Product";
 import Dashboard from "../Dashboard/Dashboard";
 import MyProfile from "../Pages/ForDahsboard/user/MyProfile";
 import PrivateRoute from "../Routes/PrivateRoute"
-import MyProduct from "../Pages/ForDahsboard/user/MyProduct";
+import UpdateProduct from "../Pages/ForDahsboard/user/UpdateProduct";
 import AddProduct from "../Pages/ForDahsboard/user/AddProduct";
 import Preivew from "../Pages/ForDahsboard/Moderator/Preivew";
 import Reported from "../Pages/ForDahsboard/Moderator/Reported";
 import Statistics from "../Pages/ForDahsboard/Admin/Statistics";
 import ManageUser from "../Pages/ForDahsboard/Admin/ManageUser";
 import ManageCoupon from "../Pages/ForDahsboard/Admin/ManageCoupon";
+import MyProduct from "../Pages/ForDahsboard/user/MyProduct";
 
 const Route = createBrowserRouter([
     {
@@ -60,6 +61,10 @@ const Route = createBrowserRouter([
             {
                 path:'addProduct',
                 element:<PrivateRoute><AddProduct></AddProduct></PrivateRoute>
+            },
+            {
+                path:'updateProduct',
+                element:<PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>
             },
             // for moderator
             {

@@ -17,7 +17,7 @@ const Navbar = () =>{
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-    const userRole =  "user";
+    const userRole =  "admin";
 
   const navItems = <>
     <NavLink

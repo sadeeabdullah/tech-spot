@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 .active {
-    @apply btn bg-[#ff3131]  text-white  btn-sm border-0
+    @apply btn bg-[#ff3131] scale-110 duration-500 transition-shadow text-white  btn-sm border-0
     
 }
 .default{

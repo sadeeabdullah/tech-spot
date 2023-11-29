@@ -9,7 +9,6 @@ const TagInputComponent = ({selected, setSelected}) => {
   return (
     <div>
 
-      <pre>{JSON.stringify(selected)}</pre>
 
       <TagsInput
         value={selected}
