@@ -16,6 +16,7 @@ import Statistics from "../Pages/ForDahsboard/Admin/Statistics";
 import ManageUser from "../Pages/ForDahsboard/Admin/ManageUser";
 import ManageCoupon from "../Pages/ForDahsboard/Admin/ManageCoupon";
 import MyProduct from "../Pages/ForDahsboard/user/MyProduct";
+import Error from "../Pages/ErrorPage/Error";
 
 const Route = createBrowserRouter([
     {
@@ -40,7 +41,12 @@ const Route = createBrowserRouter([
         {
             path:'/products',
             element:<Product></Product>
+        },
+        {
+            path:'error',
+            element:<Error></Error>
         }
+        ,
 ]
         
     },
@@ -82,6 +88,7 @@ const Route = createBrowserRouter([
                 path:'statistics',
                 element:<PrivateRoute><Statistics></Statistics></PrivateRoute>
             },
+            
             
             {
                 path: 'manageUser',
