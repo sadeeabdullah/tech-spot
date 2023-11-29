@@ -12,7 +12,7 @@ import { FaHome } from "react-icons/fa";
 
 
 const Dashboard = () => {
-    const isAdmin = true
+    const isAdmin = true;
     const isModerator = false;
     return (
         <div className="flex lg:flex-row flex-col">

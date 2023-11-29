@@ -6,6 +6,7 @@ import SectionTitle from "../../../Components/Shared/SectionTitle/SectionTitle";
 import { IoBagAdd } from "react-icons/io5";
 import TagInputComponent from "../../../Components/TagInputComponent/TagInputComponent"
 import { useState } from "react";
+import UseAuth from "../../../Hooks/UseAuth";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -14,6 +15,8 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_ke
 
 const AddItem = () => {
 
+  const { user } = UseAuth();
+  console.log(user)
   const [selected, setSelected] = useState([""]);
   const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxiosPublic();
@@ -85,7 +88,7 @@ const AddItem = () => {
             <input
               type="text"
               placeholder="Price"
-              value={"backend theke nam ano"}
+              value={user?.displayName}
               {...register("ownerName", { required: true })}
               readOnly
               className="input input-bordered w-full "
@@ -101,7 +104,7 @@ const AddItem = () => {
             <input
               type="text"
               placeholder="Price"
-              value={"backend theke nam ano"}
+              value={user?.photoURL}
               {...register("ownerImage", { required: true })}
               readOnly
               className="input input-bordered w-full "
@@ -117,7 +120,7 @@ const AddItem = () => {
             <input
               type="text"
               placeholder="Price"
-              value={"backend theke nam ano"}
+              value={user?.email}
               readOnly
               {...register("ownerEmail", { required: true })}
               className="input input-bordered w-full "

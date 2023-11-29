@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import navLogo from "../../../assets/Logo/Untitled design.svg"
 import { useEffect, useState } from "react";
 import UseAuth from "../../../Hooks/UseAuth";
@@ -7,9 +7,8 @@ const Navbar = () =>{
 
 
   const [scrolled, setScrolled] = useState(false);
-  const {user} = UseAuth();
+  const {user,logOut} = UseAuth();
   console.log(user)
-
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 0);
 
@@ -17,7 +16,14 @@ const Navbar = () =>{
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-    const userRole =  "admin";
+    const userRole =  "user";
+
+    const handleLogOut = () =>{
+      logOut()
+      .then(res=>{
+        console.log(res)
+      })
+    }
 
   const navItems = <>
     <NavLink
@@ -91,23 +97,27 @@ const Navbar = () =>{
         </ul>
         
       </div>
-      <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
-        </div>
-      </label>
-      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
-        </li>
-        <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
-      </ul>
-    </div>
+      {
+        user && <div className="dropdown dropdown-end">
+        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+          <div className="w-10 rounded-full">
+            <img alt="Tailwind CSS Navbar component" src={user?.photoURL} />
+          </div>
+        </label>
+        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <li>
+            <a className="justify-between">
+              Profile
+              <span className="badge">New</span>
+            </a>
+          </li>
+          <li><a>Settings</a></li>
+          <li>
+            <button onClick={handleLogOut}>Log Out</button>
+          </li>
+        </ul>
+      </div>
+      }
       </div>
     </div>
       </div>

@@ -1,12 +1,56 @@
 import { GrUserManager } from "react-icons/gr";
 import { RiAdminFill } from "react-icons/ri";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure"
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 
 const ManageUser = () => {
+  const axiosSecure = useAxiosSecure();
 
-    const handleAdmin = ()=>{
-        console.log('ei je hoye gelo admin')
-    }
+  const { data: users = [], refetch } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = axiosSecure.get("/users");
+      return (await res).data;
+    },
+  });
+console.log(users)
+
+    const handleAdmin = (user)=>{
+      axiosSecure.patch(`/users/admin/${user._id}`)
+      .then(res => {
+          if(res.data.modifiedCount>0){
+              refetch();
+              Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: `${user.name} is admin now!`,
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              }
+            })
+            
+            
+            
+            
+          }
+          const handleModerator = (user)=>{
+            axiosSecure.patch(`/users/moderator/${user._id}`)
+            .then(res => {
+                if(res.data.modifiedCount>0){
+                    refetch();
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.name} is moderator now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                }
+            })
+          }
 
 
 
@@ -24,23 +68,30 @@ const ManageUser = () => {
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
+      {
+        users?.map( (user, idx)=>
+        <tr key={user._id}>
+        <th>{idx + 1}</th>
+        <td>{user.name}</td>
+        <td>{user.email}</td>
         <td>
-example@gmail.com        </td>
-        <td>
-        <button className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><GrUserManager />
- </button>
+        {
+          user?.role === "moderator" ?  <p>Moderator</p> : <button onClick={()=> handleModerator(user)} className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><GrUserManager />
+          </button>
+        }
 
             
         </td>
         <td>
-        <button onClick={ handleAdmin} className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><RiAdminFill />
-</button>
+          {
+            user?.role === "admin" ? <p>Admin</p> : <button onClick={()=> handleAdmin(user)} className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><RiAdminFill />
+            </button>
+          }
+        
         </td>
-      </tr>
+      </tr>)
+      }
+      
      
     </tbody>
   </table>
