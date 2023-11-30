@@ -35,7 +35,7 @@ const Route = createBrowserRouter([
             element:<Register></Register>
         },
         {
-            path:'/productDetails',
+            path:'/productDetails/:id',
             element:<ProductDetails></ProductDetails>
         },
         {
