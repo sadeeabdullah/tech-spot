@@ -59,6 +59,7 @@ const ProductDetails = () => {
           description: description,
           rating: Title,
           productId:params?.id,
+          status: "pending"
         }
           const reviewsRes = await axiosPublic.post('/reviews',review)
           console.log(reviewsRes.data)
@@ -112,8 +113,9 @@ console.log(reviews)
           <div className='flex'>
           {
             reviews?.map((review,idx)=>(
-             
-               <div key={idx} className='mr-48 flex lg:w-[400px] flex-col  justify-center items-center bg-slate-200 p-16 rounded-xl shadow-2xl'>
+              
+                review?.status === "pending" ?
+                <div key={idx} className='mr-48 flex lg:w-[400px] flex-col  justify-center items-center bg-slate-200 p-16 rounded-xl shadow-2xl'>
               <div>
               <img className=' h-[70px] w-[70px] lg:h-[150px] lg:w-[150px] rounded-full border-4 border-main-color' src={review.ownerImage} alt="" />
               </div>
@@ -128,6 +130,11 @@ console.log(reviews)
               </div>
                 
             </div>
+            :
+            <div key={idx}></div>
+              
+             
+               
             
             ))
           }

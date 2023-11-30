@@ -2,12 +2,13 @@ import { RiFolderReceivedFill } from "react-icons/ri";
 import { HiMiniViewfinderCircle } from "react-icons/hi2";
 import { MdOutlineFeaturedVideo } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+// import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 const Preivew = () => {
 
-  const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
     const handleAccept = ()=>{
         console.log("hello")
     }
@@ -17,7 +18,7 @@ const Preivew = () => {
      const { data: reviews=[],  } = useQuery({
       queryKey: ["reviews"],
       queryFn: async () => {
-        const res = await axiosPublic.get('/reviews');
+        const res = await axiosSecure.get('/reviews');
         return res.data;
       },
     });
