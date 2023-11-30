@@ -15,7 +15,7 @@ import UseUserRole from "../Hooks/UseUserRole";
 
 const Dashboard = () => {
     const [userRole,isRoleLoading] = UseUserRole();
-    console.log(userRole)
+    // console.log(userRole)
     if(isRoleLoading){
         <div>jsdhfdhs</div>
     }

@@ -17,7 +17,6 @@ const Card = ({image,name,vote,tags ,refetch,id}) => {
     }
   }
 
-  console.log(tags)
     return (
         <div className="card rounded-sm shadow-xl bg-base-100 ">
         <figure className="h-[200px] lg:h-[250px]"><img src={image} alt="Shoes" /></figure>
