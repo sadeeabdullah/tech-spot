@@ -9,8 +9,8 @@ const Navbar = () =>{
 
   const [scrolled, setScrolled] = useState(false);
   const {user,logOut} = UseAuth();
+  // eslint-disable-next-line no-unused-vars
   const [userRole] = UseUserRole();
-  console.log(userRole)
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 0);
 
@@ -43,7 +43,7 @@ const Navbar = () =>{
             Products
           </NavLink>
           {
-            user &&
+            !user &&
           <NavLink
           to="/login"
           className={({ isActive }) => (isActive ? "active" : "default")}

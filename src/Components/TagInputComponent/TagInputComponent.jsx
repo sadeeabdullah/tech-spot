@@ -13,7 +13,7 @@ const TagInputComponent = ({selected, setSelected}) => {
       <TagsInput
         value={selected}
         onChange={setSelected}
-        placeHolder="enter fruits"
+        placeHolder="type a tag "
       />
     </div>
   );

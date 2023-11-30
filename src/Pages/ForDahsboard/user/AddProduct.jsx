@@ -131,19 +131,31 @@ const AddItem = () => {
           <div className="form-control">
             <label className="label">
               <span className="label-text">
-                Description<span className="text-red-700">*</span>
+                Description
               </span>
             </label>
             <textarea
               {...register("description")}
               className="textarea textarea-bordered h-24"
-              placeholder="Bio"
+              placeholder="Write description here"
             ></textarea>
           </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">
-                Tags<span className="text-red-700">*</span>
+                External Link
+              </span>
+            </label>
+            <textarea
+              {...register("link")}
+              className="textarea textarea-bordered "
+              placeholder="Paste the exernal link"
+            ></textarea>
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">
+                Tags ( after writing tap enter to make tag )<span className="text-red-700">*</span>
               </span>
             </label>
             <TagInputComponent selected={selected} setSelected={setSelected}></TagInputComponent>
