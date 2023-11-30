@@ -40,9 +40,11 @@ console.log(reviews)
     </thead>
     <tbody>
       {/* row 1 */}
-      <tr>
+      {
+        reviews?.map(review=>(
+          <tr key={review?._id}>
         <th>1</th>
-        <td>Cy Ganderton</td>
+        <td>{review?.productName}</td>
         <td>
         <button className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><HiMiniViewfinderCircle />View Details</button>
         </td>
@@ -57,6 +59,8 @@ Accept </button>
 Make Featured </button>
         </td>
       </tr>
+        ))
+      }
      
     </tbody>
   </table>

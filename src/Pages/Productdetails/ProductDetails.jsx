@@ -114,7 +114,7 @@ console.log(reviews)
           {
             reviews?.map((review,idx)=>(
               
-                review?.status === "pending" ?
+                review?.status === "pending" &&
                 <div key={idx} className='mr-48 flex lg:w-[400px] flex-col  justify-center items-center bg-slate-200 p-16 rounded-xl shadow-2xl'>
               <div>
               <img className=' h-[70px] w-[70px] lg:h-[150px] lg:w-[150px] rounded-full border-4 border-main-color' src={review.ownerImage} alt="" />
@@ -130,8 +130,7 @@ console.log(reviews)
               </div>
                 
             </div>
-            :
-            <div key={idx}></div>
+           
               
              
                
