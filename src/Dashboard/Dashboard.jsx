@@ -6,21 +6,29 @@ import { CgProfile } from "react-icons/cg";
 import { IoAddCircleSharp } from "react-icons/io5";
 import { RiShoppingCartFill } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
+// import useModerator from "../Hooks/useModerator";
+import UseUserRole from "../Hooks/UseUserRole";
 
 
 
 
 
 const Dashboard = () => {
-    const isAdmin = true;
-    const isModerator = false;
-    return (
+    const [userRole,isRoleLoading] = UseUserRole();
+    console.log(userRole)
+    if(isRoleLoading){
+        <div>jsdhfdhs</div>
+    }
+
+   
+   
+    return(
         <div className="flex lg:flex-row flex-col">
         {/* for side drawer */}
         <div className=" lg:w-1/5 lg:min-h-screen  text-white font-semibold   bg-main-color">
             <ul className="flex flex-col  gap-3 p-4">
                 {
-                    isAdmin && !isModerator && <>
+                    userRole === "admin" &&<>
                     <li className="">
                     
                     <NavLink to="/dashboard/statistics" className="flex items-center"
@@ -53,7 +61,7 @@ const Dashboard = () => {
                     
                 }
                 {
-                    !isAdmin && isModerator &&
+                    userRole === "moderator" &&
                     <>
                     <li>
                     
@@ -76,7 +84,7 @@ const Dashboard = () => {
                     </>
                 }
                 {
-                   !isAdmin && !isModerator && <>
+                   userRole === "user" && <>
                     <li>
                     
                     <NavLink to="/dashboard/userProfile"

@@ -1,14 +1,16 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import navLogo from "../../../assets/Logo/Untitled design.svg"
 import { useEffect, useState } from "react";
 import UseAuth from "../../../Hooks/UseAuth";
+import UseUserRole from "../../../Hooks/UseUserRole";
 
 const Navbar = () =>{
 
 
   const [scrolled, setScrolled] = useState(false);
   const {user,logOut} = UseAuth();
-  console.log(user)
+  const [userRole] = UseUserRole();
+  console.log(userRole)
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 0);
 
@@ -16,7 +18,7 @@ const Navbar = () =>{
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-    const userRole =  "user";
+    const userRoles =  "user";
 
     const handleLogOut = () =>{
       logOut()
@@ -41,11 +43,7 @@ const Navbar = () =>{
             Products
           </NavLink>
           {
-            user ? 
-          <NavLink to={userRole === "admin" ? '/dashboard/manageUser' : userRole === "moderator" ? '/dashboard/preview' : '/dashboard/userProfile'}
-          className={({ isActive }) => (isActive ? "active" : "default")}>
-              Dashboard
-          </NavLink>:
+            user &&
           <NavLink
           to="/login"
           className={({ isActive }) => (isActive ? "active" : "default")}
@@ -106,12 +104,15 @@ const Navbar = () =>{
         </label>
         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li>
-            <a className="justify-between">
-              Profile
-              <span className="badge">New</span>
+            <a className="justify-between pointer-events-none" aria-readonly>
+              {user?.displayName}
             </a>
           </li>
-          <li><a>Settings</a></li>
+          <li>
+          <NavLink to={userRoles === "admin" ? '/dashboard/manageUser' : userRoles === "moderator" ? '/dashboard/preview' : '/dashboard/userProfile'}>
+              Dashboard
+          </NavLink>
+          </li>
           <li>
             <button onClick={handleLogOut}>Log Out</button>
           </li>

@@ -2,17 +2,32 @@ import { Helmet } from "react-helmet-async";
 import Banner from "../../../Components/Shared/Banner/Banner";
 import FeaturedProduct from "../../../Components/ForHome/FeaturedProduct/FeaturedProduct";
 import TrendingProduct from "../../../Components/ForHome/TrendingProduct/TrendingProduct";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 
 const Home = () => {
+    const axiosPublic = useAxiosPublic();
+
+    const { data: products = [], refetch } = useQuery({
+      queryKey: ["products"],
+      queryFn: async () => {
+        const res = axiosPublic.get("/products");
+        return (await res).data;
+      },
+    });
+  console.log(products.length)
+  const filterFeatured = products.filter( product =>product?.status === "featured")
+  const filterTrending = products.filter( product =>product?.status === "trending")
+  console.log(filterTrending.length,filterFeatured.length)
     return (
         <div>
              <Helmet>
                 <title>Tech Spot | Home</title>
             </Helmet>
-            <Banner/>
-            <FeaturedProduct/>
-            <TrendingProduct/>
+            <Banner bannerImage={filterTrending}/>
+            <FeaturedProduct featured={filterFeatured} refetch={refetch}/>
+            <TrendingProduct trending={filterTrending}  refetch={refetch}/>
         </div>
     );
 };

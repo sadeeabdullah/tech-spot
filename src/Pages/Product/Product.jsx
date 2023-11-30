@@ -1,9 +1,20 @@
 import { useForm } from "react-hook-form";
 import Card from "../../Components/Shared/Card/card";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 
 const Product = () => {
     const { register, handleSubmit } = useForm();
+    const axiosPublic = useAxiosPublic();
+
+    const { data: products = [], refetch } = useQuery({
+      queryKey: ["products"],
+      queryFn: async () => {
+        const res = axiosPublic.get("/products");
+        return (await res).data;
+      },
+    });
 
   const onSubmit = data => {
     console.log(data)
@@ -23,35 +34,11 @@ const Product = () => {
 
             {/* todo pagination with tanstack query */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
+            {
+                    products?.map(f=>(
+                        <Card refetch={refetch} id={f._id} image={f.productImage} name={f.productName} vote={f.upvoteCount} tags={f.tags}  key={f._id}/>
+                    ))
+                }
             </div>
             
         </div>
