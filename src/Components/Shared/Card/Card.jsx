@@ -18,7 +18,7 @@ const Card = ({image,name,vote,tags ,refetch,id}) => {
   }
 
     return (
-        <div className="card rounded-sm shadow-xl bg-base-100 ">
+        <div className="card rounded-sm shadow-xl bg-base-500 ">
         <figure className="h-[200px] lg:h-[250px]"><img src={image} alt="Shoes" /></figure>
         <div className="card-body">
           {/* TOdo : set the onclick on the name of the product */}

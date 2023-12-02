@@ -16,10 +16,8 @@ const Home = () => {
         return (await res).data;
       },
     });
-  console.log(products.length)
   const filterFeatured = products.filter( product =>product?.status === "featured")
   const filterTrending = products.filter( product =>product?.status === "trending")
-  console.log(filterTrending.length,filterFeatured.length)
     return (
         <div>
              <Helmet>

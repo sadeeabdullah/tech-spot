@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import profileImage from "../../../assets/Logo/Orange Modern Letter A Icon Design Template  Logo .png"
 import { MdWorkspacePremium } from "react-icons/md";
 import SectionTitle from "../../../Components/Shared/SectionTitle/SectionTitle";
+import { Link } from "react-router-dom";
 
 
 const MyProfile = () => {
@@ -41,10 +42,12 @@ const MyProfile = () => {
                 {
                     subscribed ? 
                     <p><span className="font-semibold">Status : </span> Verified</p>:
+                    <Link to='/dashboard/payment'>
                     <button 
-                    onClick={handlePayment}
+                    
                     className="btn btn-sm text-md text-main-color bg-black w-fit shadow-inner border-0 shadow-black hover:bg-gray-600"><MdWorkspacePremium />
                     99$  Membership Subscribe</button>
+                    </Link>
 
                 }
             </div>

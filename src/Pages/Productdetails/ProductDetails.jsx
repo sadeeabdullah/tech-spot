@@ -58,33 +58,46 @@ const ProductDetails = () => {
           ownerImage : image,
           description: description,
           rating: Title,
-          productId:params?.id,
-          status: "pending"
         }
-          const reviewsRes = await axiosPublic.post('/reviews',review)
-          console.log(reviewsRes.data)
-        if(reviewsRes.data.insertedId){
-          // show success pop up
-          reset();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `your review is added`,
-            showConfirmButton: false,
-            timer: 1500
-          });
-        }
+        const reviewsRes = await axiosPublic.patch(`/reviews/${details?._id}`,review)
+      if(reviewsRes.data.modifiedCount>0){
+        // show success pop up
+        reset();
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `your review is added`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
          
     }
-     // for reviews
-     const { data: reviews=[],  } = useQuery({
-      queryKey: ["reviews"],
-      queryFn: async () => {
-        const res = await axiosPublic.get(`/reviews/${params.id}`);
-        return res.data;
-      },
-    });
-console.log(reviews)
+   
+
+
+    const handleReport = async ( id) =>{
+      const reportProduct = {
+        productId: id ,
+        productName: details?.productName
+      }
+
+      const reportsRes = await axiosPublic.post('/reports',reportProduct)
+    if(reportsRes.data.insertedId){
+      // show success pop up
+      reset();
+      refetch();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `Successfully reported.`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+
+    }
     return (
         <div>
             <div className='flex md:flex-row flex-col mt-8 gap-6 p-4 '>
@@ -98,7 +111,7 @@ console.log(reviews)
                 <p className='text-4xl mb-2'>{details?.productName}</p>
                 <p className='text-sky-700 mt-2 mb-2'>#{details?.tags}</p>
                 <button onClick={()=>handleUpVote(details?._id,details?.upvoteCount +1 )} className="btn lg:mr-4 mr-2 mb-2 text-main-color bg-black w-fit shadow-inner border-0 shadow-black hover:bg-gray-600"><FaArrowUp/>Upvote {details?.upvoteCount} </button>
-                <button className="btn  text-secondary-color bg-black w-fit shadow-inner border-0 shadow-black hover:bg-gray-600"><MdReportProblem />Report </button>
+                <button onClick={()=>handleReport(details?._id)}  className="btn  text-secondary-color bg-black w-fit shadow-inner border-0 shadow-black hover:bg-gray-600"><MdReportProblem />Report </button>
             </div>
             
         </div>
@@ -108,13 +121,13 @@ console.log(reviews)
       <div className=''>
             <SectionTitle title={"Reviews"}></SectionTitle>
         {
-         reviews?.length>0? 
+         details?.reviews?.length>0? 
          <Marquee  pauseOnHover className=''>
           <div className='flex'>
           {
-            reviews?.map((review,idx)=>(
+            details?.reviews?.map((review,idx)=>(
               
-                review?.status === "pending" &&
+                
                 <div key={idx} className='mr-48 flex lg:w-[400px] flex-col  justify-center items-center bg-slate-200 p-16 rounded-xl shadow-2xl'>
               <div>
               <img className=' h-[70px] w-[70px] lg:h-[150px] lg:w-[150px] rounded-full border-4 border-main-color' src={review.ownerImage} alt="" />
@@ -123,7 +136,7 @@ console.log(reviews)
                 <h2 className='text-2xl'>{review.ownerName}</h2>
               <Rating
       style={{ maxWidth: 180 }}
-      value={3}
+      value={review.rating}
       readOnly
     />
                 <p><span className='font-bold'>What he/she says : </span> {review.description}</p>

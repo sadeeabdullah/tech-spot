@@ -17,6 +17,7 @@ import ManageUser from "../Pages/ForDahsboard/Admin/ManageUser";
 import ManageCoupon from "../Pages/ForDahsboard/Admin/ManageCoupon";
 import MyProduct from "../Pages/ForDahsboard/user/MyProduct";
 import Error from "../Pages/ErrorPage/Error";
+import Payment from "../Pages/Payment/Payment";
 
 const Route = createBrowserRouter([
     {
@@ -35,8 +36,12 @@ const Route = createBrowserRouter([
             element:<Register></Register>
         },
         {
+            path:'payment',
+            element:<Payment></Payment>
+        },
+        {
             path:'/productDetails/:id',
-            element:<ProductDetails></ProductDetails>
+            element:<PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
         },
         {
             path:'/products',

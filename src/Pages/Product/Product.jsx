@@ -22,8 +22,8 @@ const Product = () => {
     return (
         <div className="my-8">
             {/* here should be the search bar */}
-            <form onSubmit={handleSubmit(onSubmit)} className="flex w-1/2 mb-8 rounded-full mx-auto border-gray-500 border-[0.5px]">
-      <input className="border-gray-700 border-1 pl-4 w-full rounded-l-full"
+            <form onSubmit={handleSubmit(onSubmit)} className="flex w-1/2 mb-8 rounded-full mx-auto border-gray-300 border-[0.5px]">
+      <input className="border-1 pl-4 w-full rounded-l-full"
         type="text"
         placeholder="Search Product"
         {...register('query')} // Register 'query' field with react-hook-form
@@ -36,8 +36,11 @@ const Product = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
             {
                     products?.map(f=>(
-                        <Card refetch={refetch} id={f._id} image={f.productImage} name={f.productName} vote={f.upvoteCount} tags={f.tags}  key={f._id}/>
-                    ))
+                      f?.productStatus === 'accepted' && (
+                          <Card refetch={refetch} id={f._id} image={f.productImage} name={f.productName} vote={f.upvoteCount} tags={f.tags}  key={f._id}/>
+                      )
+                  )
+                    )
                 }
             </div>
             
