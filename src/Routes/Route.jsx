@@ -18,6 +18,7 @@ import ManageCoupon from "../Pages/ForDahsboard/Admin/ManageCoupon";
 import MyProduct from "../Pages/ForDahsboard/user/MyProduct";
 import Error from "../Pages/ErrorPage/Error";
 import Payment from "../Pages/Payment/Payment";
+import ProductUpdate from "../Pages/ForDahsboard/user/ProductUpdate";
 
 const Route = createBrowserRouter([
     {
@@ -36,7 +37,7 @@ const Route = createBrowserRouter([
             element:<Register></Register>
         },
         {
-            path:'payment',
+            path:'/payment',
             element:<Payment></Payment>
         },
         {
@@ -46,6 +47,10 @@ const Route = createBrowserRouter([
         {
             path:'/products',
             element:<Product></Product>
+        },
+        {
+            path: 'update/:id',
+            element:<PrivateRoute><ProductUpdate></ProductUpdate></PrivateRoute>
         },
         {
             path:'error',
@@ -87,6 +92,7 @@ const Route = createBrowserRouter([
                 path: 'reported',
                 element:<PrivateRoute><Reported></Reported></PrivateRoute>
             },
+            
             // for admin
 
             {

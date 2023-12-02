@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import SectionTitle from "../../../Components/Shared/SectionTitle/SectionTitle";
@@ -19,7 +18,6 @@ const AddItem = () => {
   const [selected, setSelected] = useState('');
   const { register, handleSubmit, reset } = useForm();
   const axiosPublic = useAxiosPublic();
-  const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
     // image upload to imgb and then get an url
     const imageFile = { image: data.image[0] };
@@ -46,7 +44,7 @@ const AddItem = () => {
         // image: res.data.data.display_url
       };
       console.log(menuItem)
-        const menuRes = await axiosSecure.post('/products',menuItem)
+        const menuRes = await axiosPublic.post('/products',menuItem)
         console.log(menuRes.data)
         if(menuRes.data.insertedId){
           // show success pop up

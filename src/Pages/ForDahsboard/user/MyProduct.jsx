@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import UseAuth from "../../../Hooks/UseAuth";
+import { Link } from "react-router-dom";
 
 
 const MyProduct = () => {
@@ -33,22 +34,21 @@ const MyProduct = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
           })
-        // .then((result) => {
-        //     if (result.isConfirmed) {
-        //       axiosSecure.delete(`/users/${user._id}`).then((res) => {
-        //         console.log(res.data);
-        //         if (res.data.deletedCount > 0) {
-        //           refetch();
-        //           Swal.fire({
-        //             title: "Deleted!",
-        //             text: "Your file has been deleted.",
-        //             icon: "success",
-        //           });
-        //         }
-        //       }
-        // );
-        //     }
-        //   });
+        .then((result) => {
+            if (result.isConfirmed) {
+              axiosPublic.delete(`/products/${id}`).then((res) => {
+                if (res.data.deletedCount > 0) {
+                  refetch();
+                  Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success",
+                  });
+                }
+              }
+        );
+            }
+          });
       }
 
 
@@ -77,11 +77,11 @@ const MyProduct = () => {
         <td>{product?.productName}</td>
         <td>{product?.upvoteCount}</td>
         <td>{product?.productStatus}</td>
+        <Link to={`/update/${product?._id}`}>
         <td>
         <button className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><GrDocumentUpdate /> Update </button>
-
-            
         </td>
+        </Link>
         <td>
         <button onClick={() => handleDeleteUser(product?._id)} className="btn text-main-color bg-secondary-color w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-red-600"><AiFillDelete />Delete </button>
         </td>

@@ -11,7 +11,6 @@ const Navbar = () =>{
   const {user,logOut} = UseAuth();
   // eslint-disable-next-line no-unused-vars
   const [userRole] = UseUserRole();
-  console.log(userRole)
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 0);
 
