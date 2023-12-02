@@ -31,16 +31,17 @@ const AddItem = () => {
     if (res.data.success) {
       // now send the menu item data to the server with the image
       const menuItem = {
-        name: data.name,
-        price: data.price,
+        productName: data.name,
+        productPrice: data.price,
         ownerName: data.ownerName,
         ownerEmail: data.ownerEmail,
         ownerImage: data.ownerImage,
         description: data.description,
-        image: res.data.data.display_url,
-        tags: selected,
+        productImage: res.data.data.display_url,
+        tags: [selected],
         productStatus : "pending",
-        status:""
+        status:"",
+        upvoteCount : 0
         // Product : data.Product,
         // image: res.data.data.display_url
       };

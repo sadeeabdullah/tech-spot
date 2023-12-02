@@ -8,6 +8,7 @@ import { RiShoppingCartFill } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
 // import useModerator from "../Hooks/useModerator";
 import UseUserRole from "../Hooks/UseUserRole";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -24,6 +25,9 @@ const Dashboard = () => {
    
     return(
         <div className="flex lg:flex-row flex-col">
+            <Helmet>
+                <title>Tech Spot | Dashboard</title>
+            </Helmet>
         {/* for side drawer */}
         <div className=" lg:w-1/5 lg:min-h-screen  text-white font-semibold   bg-main-color">
             <ul className="flex flex-col  gap-3 p-4">

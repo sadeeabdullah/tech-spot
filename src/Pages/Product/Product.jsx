@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import Card from "../../Components/Shared/Card/card";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 
 const Product = () => {
@@ -21,6 +22,9 @@ const Product = () => {
   };
     return (
         <div className="my-8">
+          <Helmet>
+                <title>Tech Spot | Products</title>
+            </Helmet>
             {/* here should be the search bar */}
             <form onSubmit={handleSubmit(onSubmit)} className="flex w-1/2 mb-8 rounded-full mx-auto border-gray-300 border-[0.5px]">
       <input className="border-1 pl-4 w-full rounded-l-full"

@@ -2,12 +2,27 @@
 import { GrDocumentUpdate } from "react-icons/gr";
 import { AiFillDelete } from "react-icons/ai";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import UseAuth from "../../../Hooks/UseAuth";
 
 
 const MyProduct = () => {
 
+  const axiosPublic = useAxiosPublic();
+  const { user } = UseAuth();
 
-    const handleDeleteUser=( user )=>{
+
+  
+  const { data: products = [], refetch } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const res = axiosPublic.get(`/products/${user?.email}`);
+      return (await res).data;
+    },
+  });
+
+    const handleDeleteUser=( id )=>{
     
         Swal.fire({
             title: "Are you sure?",
@@ -55,21 +70,25 @@ const MyProduct = () => {
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>pending</td>
+      {
+        products?.map((product,idx)=>(
+          <tr key={idx} >
+        <th>{idx+1}</th>
+        <td>{product?.productName}</td>
+        <td>{product?.upvoteCount}</td>
+        <td>{product?.productStatus}</td>
         <td>
         <button className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><GrDocumentUpdate /> Update </button>
 
             
         </td>
         <td>
-        <button onClick={() => handleDeleteUser()} className="btn text-main-color bg-secondary-color w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-red-600"><AiFillDelete />Delete </button>
+        <button onClick={() => handleDeleteUser(product?._id)} className="btn text-main-color bg-secondary-color w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-red-600"><AiFillDelete />Delete </button>
         </td>
       </tr>
+        ))
+      }
+      
      
     </tbody>
   </table>

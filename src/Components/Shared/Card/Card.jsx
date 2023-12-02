@@ -2,6 +2,7 @@
 import { FaArrowUp } from "react-icons/fa";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const Card = ({image,name,vote,tags ,refetch,id}) => {
@@ -13,12 +14,19 @@ const Card = ({image,name,vote,tags ,refetch,id}) => {
     if(res.data.modifiedCount>0){
       // show success pop up
       refetch();
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `Upvoted successfully`,
+        showConfirmButton: false,
+        timer: 1500
+      });
       
     }
   }
 
     return (
-        <div className="card rounded-sm shadow-xl bg-base-500 ">
+        <div className="card rounded-sm shadow-2xl bg-base-500 ">
         <figure className="h-[200px] lg:h-[250px]"><img src={image} alt="Shoes" /></figure>
         <div className="card-body">
           {/* TOdo : set the onclick on the name of the product */}

@@ -12,6 +12,7 @@ import UseAuth from '../../Hooks/UseAuth';
 // import Rating from '../../Components/Rating/Rating';
 import '@smastrom/react-rating/style.css'
 import { Rating } from '@smastrom/react-rating';
+import { Helmet } from 'react-helmet-async';
 
 const ProductDetails = () => {
 
@@ -46,6 +47,13 @@ const ProductDetails = () => {
       if(res.data.modifiedCount>0){
         // show success pop up
         refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Upvoted successfully`,
+          showConfirmButton: false,
+          timer: 1500
+        });
         
       }
     }
@@ -100,6 +108,9 @@ const ProductDetails = () => {
     }
     return (
         <div>
+          <Helmet>
+                <title>Tech Spot | Product Details</title>
+            </Helmet>
             <div className='flex md:flex-row flex-col mt-8 gap-6 p-4 '>
             {/* div for the image */}
             <div className="md:w-1/2  ">

@@ -23,8 +23,19 @@ const Preivew = () => {
 
 
 
-    const handleAccept = (id)=>{
-        console.log(id)
+    const handleAccept = async(id)=>{
+      const featureRes = await axiosSecure.patch(`/acceptReject/${id}`,{productStatus:"accepted"})
+      if(featureRes.data.modifiedCount>0){
+        // show success pop up
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `your accepted the products`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
     }
 
     const handleMakeFeatured = async(id)=>{
@@ -41,17 +52,35 @@ const Preivew = () => {
         });
       }
     }
+    const handleReject = async(id)=>{
+      const featureRes = await axiosSecure.patch(`/acceptReject/${id}`,{productStatus:"rejected"})
+      if(featureRes.data.modifiedCount>0){
+        // show success pop up
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `your rejected the products`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    }
 
 
     
 
     products.sort((a, b) => {
-      if (a.productStatus === "pending" && b.productStatus === "accepted") {
-        return -1;
-      } else if (a.productStatus === "accepted" && b.productStatus === "pending") {
-        return 1; 
-      }
-      return 0; 
+      const statusPriority = {
+        'pending': 1,
+        'accepted': 2,
+        'rejected': 3
+      };
+    
+      const statusA = statusPriority[a.productStatus];
+      const statusB = statusPriority[b.productStatus];
+    
+      return statusA - statusB;
     });
 
 
@@ -85,7 +114,7 @@ const Preivew = () => {
           product?.productStatus === "pending" ? 
           <button onClick={()=>handleAccept(product?._id)} className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><RiFolderReceivedFill />
   Accept </button>
-  :
+  : product?.productStatus  === 'rejected' ? <p>Rejected</p>:
   <p>Accepted</p>
         }
         </td> 
@@ -93,7 +122,7 @@ const Preivew = () => {
         {
           
           product?.status === "featured" ? <p>Featured</p> 
-          :
+          : product?.productStatus  === 'rejected' ? <p>Rejected</p>:
           <button onClick={()=>handleMakeFeatured(product?._id)} className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><MdOutlineFeaturedVideo />
 Make Featured </button>
 
@@ -101,9 +130,14 @@ Make Featured </button>
         </td>
         
         <td>
-        <button onClick={() => handleAccept()} className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><TbPlayerEjectFilled />
+        {
+          product?.productStatus === "pending" ? 
+          <button onClick={()=>handleReject(product?._id)} className="btn text-main-color bg-black w-fit btn-sm shadow-inner border-0 shadow-black hover:bg-gray-600"><TbPlayerEjectFilled />
 
-Reject</button>
+          Reject </button>
+  :product?.productStatus  === 'rejected' ? <p>Rejected</p>:
+  <p>Already Accepted</p>
+        }
         </td>
       </tr>
         ))
