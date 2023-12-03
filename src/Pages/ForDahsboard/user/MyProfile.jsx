@@ -4,30 +4,24 @@ import profileImage from "../../../assets/Logo/Orange Modern Letter A Icon Desig
 import { MdWorkspacePremium } from "react-icons/md";
 import SectionTitle from "../../../Components/Shared/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import UseAuth from "../../../Hooks/UseAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 const MyProfile = () => {
-    const subscribed = false;
+    const axiosSecure = useAxiosSecure();
+    const { user } = UseAuth();
 
-    const handlePayment = () =>{
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
-            }
-          });
-    }
+    const { data:details} = useQuery({
+      queryKey:['payments'],
+      queryFn:async () => {
+        const res = axiosSecure.get(`/payments/${user?.email}`);
+        return (await res).data;
+      },
+    })
+    console.log(details)
     
     return (
         <div>
@@ -39,17 +33,21 @@ const MyProfile = () => {
                 <p>example@gmail.com</p>
 
                 <h2 className="font-semibold text-xl">Membership status:</h2>
-                {
-                    subscribed ? 
-                    <p><span className="font-semibold">Status : </span> Verified</p>:
-                    <Link to='/payment'>
-                    <button 
-                    
-                    className="btn btn-sm text-md text-main-color bg-black w-fit shadow-inner border-0 shadow-black hover:bg-gray-600"><MdWorkspacePremium />
-                    99$  Membership Subscribe</button>
-                    </Link>
+                
+               {
+                details &&
+                (
+                  details[0]?.status === "paid" ?
+                  <p><span className="font-semibold">Status : </span> Verified</p> :
+                  <Link to='/payment'>
+                <button 
+                
+                className="btn btn-sm text-md text-main-color bg-black w-fit shadow-inner border-0 shadow-black hover:bg-gray-600"><MdWorkspacePremium />
+                99$  Membership Subscribe</button>
+                </Link>
 
-                }
+    )
+               }
             </div>
         </div>
     );

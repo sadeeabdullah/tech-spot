@@ -5,6 +5,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure'
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import UseAuth from "../../Hooks/UseAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const CheckOutForm = () => {
   const [ error, setError] = useState('');
@@ -13,6 +14,7 @@ const CheckOutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const {user} = UseAuth();
     const navigate = useNavigate();
     const totalPrice = 99
@@ -72,8 +74,17 @@ const CheckOutForm = () => {
         setTransactionId(paymentIntent.id)
 
 
-        
-       
+        // now save the payment in the database
+        const payment = {
+          email:user.email,
+          price : totalPrice,
+          transactionId:paymentIntent.id,
+          date : new Date(), //utc date convert. use moment js to covert the time
+          status:'paid'
+        }
+        const res = await axiosPublic.post('/payments',payment)
+        console.log(res.data)
+        if (res.data?.insertedId) {
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -81,9 +92,23 @@ const CheckOutForm = () => {
             showConfirmButton: false,
             timer: 1500
           });
-          navigate('/')
+          navigate('/dashboard/userProfile')
         }
       }
+    }
+
+
+       
+      //     Swal.fire({
+      //       position: "top-end",
+      //       icon: "success",
+      //       title: "Thanks for doing payment",
+      //       showConfirmButton: false,
+      //       timer: 1500
+      //     });
+      //     navigate('/')
+      //   }
+      // }
     
 
 
