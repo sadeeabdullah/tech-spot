@@ -9,8 +9,7 @@ import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 
 
 const ProductUpdate = () => {
@@ -46,6 +45,7 @@ const ProductUpdate = () => {
             if(menuRes.data.modifiedCount>0){
               // show success pop up
               reset();
+              refetch();
               Swal.fire({
                 position: "top-end",
                 icon: "success",

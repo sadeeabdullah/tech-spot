@@ -42,7 +42,7 @@ const MyProfile = () => {
                 {
                     subscribed ? 
                     <p><span className="font-semibold">Status : </span> Verified</p>:
-                    <Link to='/dashboard/payment'>
+                    <Link to='/payment'>
                     <button 
                     
                     className="btn btn-sm text-md text-main-color bg-black w-fit shadow-inner border-0 shadow-black hover:bg-gray-600"><MdWorkspacePremium />
