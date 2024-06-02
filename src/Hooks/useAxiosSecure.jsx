@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/UseAuth"
+import React from 'react';
+
 
 const axiosSecure  = axios.create({
-    baseURL:'https://tech-spot-server.vercel.app'
+    baseURL:'http://api.sadeeabdullah.com/'
 })
 const useAxiosSecure = () => {
     const { logOut } = useAuth();

@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import React from 'react';
 import Card from "../../Shared/Card/card";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 

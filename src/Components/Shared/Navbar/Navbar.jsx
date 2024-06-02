@@ -3,6 +3,7 @@ import navLogo from "../../../assets/Logo/Untitled design.svg"
 import { useEffect, useState } from "react";
 import UseAuth from "../../../Hooks/UseAuth";
 import UseUserRole from "../../../Hooks/UseUserRole";
+import React from 'react';
 
 const Navbar = () =>{
 

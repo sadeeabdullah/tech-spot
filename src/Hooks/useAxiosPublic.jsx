@@ -1,7 +1,8 @@
 import axios from "axios";
+import React from 'react';
 
 const axiosPublic = axios.create({
-    baseURL: 'https://tech-spot-server.vercel.app'
+    baseURL: 'http://api.sadeeabdullah.com/'
 
 })
 

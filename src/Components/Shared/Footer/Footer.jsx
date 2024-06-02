@@ -4,6 +4,7 @@ import { MdMarkEmailUnread } from "react-icons/md";
 import { GoDot } from "react-icons/go";
 import { ImFacebook2, ImInstagram, ImYoutube } from "react-icons/im";
 import { ImLinkedin } from "react-icons/im";
+import React from 'react';
 
 import FooterImage from "../../../assets/Logo/Untitled design.svg"
 const Footer = () => {

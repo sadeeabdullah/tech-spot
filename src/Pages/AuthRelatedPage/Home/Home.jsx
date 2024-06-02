@@ -4,7 +4,7 @@ import FeaturedProduct from "../../../Components/ForHome/FeaturedProduct/Feature
 import TrendingProduct from "../../../Components/ForHome/TrendingProduct/TrendingProduct";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
-
+import React from 'react';
 
 const Home = () => {
     const axiosPublic = useAxiosPublic();

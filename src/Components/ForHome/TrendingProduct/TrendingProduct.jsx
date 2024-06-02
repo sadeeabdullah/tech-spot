@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import Card from "../../Shared/Card/card";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
-
+import React from 'react';
 
 const TrendingProduct = ({trending , refetch}) => {
     return (

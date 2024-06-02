@@ -1,4 +1,5 @@
-/* eslint-disable react/prop-types */
+import React from 'react';
+
 import { FaArrowUp } from "react-icons/fa";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { Link } from "react-router-dom";

@@ -5,6 +5,7 @@ import UseAuth from "../../Hooks/UseAuth";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import React from 'react';
 
 
 const Register = () => {

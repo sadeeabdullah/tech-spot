@@ -1,6 +1,7 @@
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckOutForm from "./CheckOutForm";
+import React from 'react';
 
 
 const Payment = () => {

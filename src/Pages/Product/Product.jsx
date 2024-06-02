@@ -3,12 +3,12 @@ import Card from "../../Components/Shared/Card/card";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import React from 'react';
 
 
 const Product = () => {
     const { register, handleSubmit } = useForm();
     const axiosPublic = useAxiosPublic();
-
     const { data: products = [], refetch } = useQuery({
       queryKey: ["products"],
       queryFn: async () => {

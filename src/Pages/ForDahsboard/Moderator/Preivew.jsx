@@ -6,6 +6,7 @@ import { TbPlayerEjectFilled } from "react-icons/tb";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import React from 'react';
 
 
 const Preivew = () => {

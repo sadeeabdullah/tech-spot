@@ -1,6 +1,6 @@
 import { FaHome } from "react-icons/fa";
 import errorImage from "../../assets/image/404.gif"
-
+import React from 'react';
 
 const Error = () => {
     return (

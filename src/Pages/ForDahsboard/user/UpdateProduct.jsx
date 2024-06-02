@@ -7,6 +7,7 @@ import { IoBagAdd } from "react-icons/io5";
 import TagInputComponent from "../../../Components/TagInputComponent/TagInputComponent"
 import { useState } from "react";
 import { GrDocumentUpdate } from "react-icons/gr";
+import React from 'react';
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;

@@ -13,6 +13,7 @@ import UseAuth from '../../Hooks/UseAuth';
 import '@smastrom/react-rating/style.css'
 import { Rating } from '@smastrom/react-rating';
 import { Helmet } from 'react-helmet-async';
+import React from 'react';
 
 const ProductDetails = () => {
 
